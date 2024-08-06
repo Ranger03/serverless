@@ -1,0 +1,10 @@
+version: "3" #version of docker compose
+services: #define all contianers you want to make
+  website: # container
+    image: nginx:latest #imagine of the container
+    container_name: myWebsite #continer name
+    volumes:
+      - ./:/usr/share/nginx/html  # local location:toDocker location
+    ports:
+      - "3000:80"
+    restart: always # if container goes down, it will restart automatically

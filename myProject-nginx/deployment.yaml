@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: website
+  template:
+    metadata:
+      labels:
+        app: website
+    spec:
+      containers:
+        - name: website
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: website-volume
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: website-volume
+          hostPath:
+            path: "C:\\Users\\Sakhile\\Desktop\\MyProject\\myProject-nginx"
+            type: Directory

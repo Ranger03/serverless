@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres-db
+          image: ranger03/my-postgres-db:latest
+          ports:
+            - containerPort: 5432
+
+
+# commands
+# kubectl get nodes --> get all nodes
+# kubectl get pods --> get all pods
+# kubectl get deployments --> get all deployments
+# kubectl get services --> get all services
+# kubectl apply -f <files>.yaml --> run deployment
+# kubectl apply -f postgres-deployment.yaml
+# kubectl apply -f server-api-deployment.yaml --> same with services
+# kubectl delete all --all --> delete everything when done using kubernetes
+# kubectl config get-contexts --> ...where kubernetes running

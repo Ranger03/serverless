@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: my-postgres-db
+    build:
+      context: ./docker_setup_db
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: LeaderBoard
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+
+  api:
+    image: server-api
+    build:
+      context: ./docker_setup_api
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: LeaderBoard
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+    ports:
+      - "3000:3000"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

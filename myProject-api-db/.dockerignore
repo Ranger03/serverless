@@ -1,0 +1,5 @@
+docker_setup
+node_modules
+docker_setup_db
+docker_setup_api
+.env
